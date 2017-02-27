@@ -1,0 +1,23 @@
+h1, h2, h3, h4 { font-family: Helvetica; font-weight: bold; }
+h1, h2 {color: steelblue; text-align: center; margin-top: 8px; }
+h3 { color: crimson; text-align: left;  margin-top: 6px; padding-bottom: 0;  }
+
+h3.entry { font-size="12pt" } 
+h4.contributor { margin-top: 1px; font-size="9pt" }
+h1, h2, h3, h4 {margin-bottom: 2px; }
+body { 
+       background-image: url("/backgrounds/yellowonwhite.jpg");
+       font-family: Times;
+       margin-left: 5%;
+       margin-right: 5%;
+     }
+head { }
+table { }
+blockquote, p, td, ul, ol, li { margin-top: 2px; margin-bottom: 0; }
+a:link {color: darkblue;}
+a:active {color: crimson;}
+a:visited {color: green;}
+.smallred { color: crimson; font-size: small }
+.smallbrown { color: brown; font-size: small }
+.nomargins { margin-top: 0;}
+.toc { text-align: left; color: crimson; }

@@ -1,0 +1,177 @@
+public class BST<E extends Comparable<E>> {
+    private Node<E> root;
+    private Node<E> last;
+    private E min;
+
+    public BST(){
+        root = null;
+    }
+
+    public Node<E> getRoot(){
+        return root;
+    }
+
+    public void insert(E data, Node<E> currentNode){
+    	Node<E> newNode = new Node<E>(data);
+    	if(currentNode==null){
+    		currentNode=newNode;
+  
+    		if((int) currentNode.getData() < (int) last.getData()){
+    			currentNode.setParent(last);
+    			last.setLeftChild(currentNode);
+    		}
+    		else if((int) currentNode.getData() > (int) last.getData()){
+    			currentNode.setParent(last);
+    			last.setRightChild(currentNode);
+    		}
+    		
+    		
+    	}
+    	else if (newNode.getData() == currentNode.getData())
+    		System.out.println("Duplacate node detected");
+    	else if((int) newNode.getData() < (int) currentNode.getData()){
+    		last=currentNode;
+    		insert(data, currentNode.getLeftChild());
+    	}
+    	
+    	else if((int) newNode.getData() > (int) currentNode.getData()){
+    		last=currentNode;
+    		insert(data, currentNode.getRightChild());
+    	}
+
+    	
+    }
+
+    public Node<E> find(E data, Node<E>node){
+    	Node<E> newNode = new Node<E>(data);
+    	if(node==null){
+    		
+    	}
+    	
+    	else if ((int)newNode.getData() == (int)((Node<E>) node).getData()){
+    		last=node;
+    		return (Node<E>)node;
+    	}
+    	else if((int) newNode.getData() < (int) ((Node<E>) node).getData()){
+    		Node<E> left = ((Node<E>) node).getLeftChild();
+    		
+    		find(data, left);
+    	}
+    	
+    	else if((int) newNode.getData() > (int) ((Node<E>) node).getData()){
+    		Node<E> right = ((Node<E>) node).getRightChild();
+    		
+    		find(data, right);
+ 
+    	}
+		return null;
+            
+}
+
+
+    public int isnull(Node<E> test){
+    	if(test==null)
+    		return 1;
+    	return 2;
+    }
+
+    public void delete(E data, Node<E>root){
+    	find(data, root);
+    	Node<E> deleted = last;
+    	
+    	boolean righty = deleted.getRightChild()==null;
+    	boolean lefty = deleted.getLeftChild()==null;
+    	   	
+    	if(righty && lefty){
+    		if((int) deleted.getData() < (int) deleted.getParent().getData()){
+    			deleted.getParent().setLeftChild(null);
+    		}
+    	else if((int) deleted.getData() > (int) deleted.getParent().getData()){
+    			deleted.getParent().setRightChild(null);
+    		}
+    	}
+    	
+    	else if(righty || lefty){
+    		Node<E> parent = deleted.getParent();
+    		if(righty==true){
+    			parent.setLeftChild(deleted.getLeftChild());	
+    		}
+    		else
+    			parent.setRightChild(deleted.getRightChild());
+    			
+    		}
+    	else{
+    		Node<E> right = deleted.getRightChild();
+    		minValue(right);
+    		deleted.setData(min);
+    		
+    			
+    		}
+    			
+    		
+    	}
+    public void minValue(Node<E> node) {
+        if (node.getLeftChild() == null){
+        	  E val = node.getData();
+        	  delete(val, node);
+              min=(E) val;
+        	}
+              
+        else{
+              minValue(node.getLeftChild());
+        }
+  }
+       
+
+    public void traverse(String order, Node<E> top) {
+        if (top != null){
+            switch (order) {
+                case "preorder":
+                    preorder(top);
+
+                    break;
+                case "inorder":
+                    inorder(top);
+
+                    break;
+                case "postorder":
+                	postorder(top);
+                    break;
+            }
+        }
+    }
+
+	void postorder(Node<E> root) {
+		if(root == null) return;
+		
+		postorder( root.getLeftChild());
+		postorder( root.getRightChild() ); 
+		System.out.print((int) root.getData());
+		
+	}
+
+	void inorder(Node<E> root) {
+		if(root == null) return;
+		
+		inorder( root.getLeftChild());
+		
+		System.out.print((int) root.getData());
+		  
+		inorder( root.getRightChild() ); 
+		
+	}
+
+	void preorder(Node<E> root) {
+		if(root == null) return;
+		  
+		  System.out.print((int) root.getData());
+		  
+		  preorder( root.getLeftChild());
+		  preorder( root.getRightChild() ); 
+		  		
+	}
+}
+
+
+
+
